@@ -31,6 +31,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Biomes;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -56,7 +57,9 @@ public class BlockDebarkedLog extends BlockLog {
 
     public IBlockState getParentState(int variant) {
         if (variant < 0 || variant >= parents.length) {
-            DebarkMod.logger.error("Mod requested parent block state for " + this + " with invalid variant number " + variant + "!");
+            if (DebarkMod.enableDebugLogging) {
+                DebarkMod.logger.error("Mod requested parent block state for " + this + " with invalid variant number " + variant + "!");
+            }
             return parents[0];
         } else {
             return parents[variant];
@@ -69,7 +72,9 @@ public class BlockDebarkedLog extends BlockLog {
 
     public ItemStack getParentStack(int variant) {
         if (variant < 0 || variant >= parents.length) {
-            DebarkMod.logger.error("Mod requested parent item sstack for " + this + " with invalid variant number " + variant + "!");
+            if (DebarkMod.enableDebugLogging) {
+                DebarkMod.logger.error("Mod requested parent item stack for " + this + " with invalid variant number " + variant + "!");
+            }
             return parents[0].getBlock().getItem(null, null, parents[0]);
         }
         return parents[variant].getBlock().getItem(null, null, parents[variant]);
@@ -106,6 +111,11 @@ public class BlockDebarkedLog extends BlockLog {
     @Override
     public int getMetaFromState(IBlockState state) {
         return state.getValue(BlockLog.LOG_AXIS).ordinal() | (state.getValue(VARIANT) << 2);
+    }
+
+    @Override
+    protected ItemStack getSilkTouchDrop(IBlockState state) {
+        return getParentStack(state.getValue(VARIANT));
     }
 
     @Override

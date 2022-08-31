@@ -76,6 +76,7 @@ public final class DebarkMod {
     static final Map<IBlockState, BlockDebarkedLogEntry> blocksMap = new LinkedHashMap<>();
 
     private static boolean debarkByRecipe, debarkInWorld, debarkInWorldRequiresShift;
+    public static boolean enableDebugLogging;
 
     private void add(String key) {
         String[] keySplit = key.split(",");
@@ -148,6 +149,7 @@ public final class DebarkMod {
         debarkByRecipe = config.getBoolean("debarkByRecipe", "interactions", true, "Allow debarking in crafting tables.");
         debarkInWorld = config.getBoolean("debarkInWorld", "interactions", true, "Allow debarking by right-clicking blocks with an axe.");
         debarkInWorldRequiresShift = config.getBoolean("debarkInWorldRequiresShift", "interactions", false, "Require shift-right-clicking for debarking in-world.");
+        enableDebugLogging = config.getBoolean("debugLogsEnabled", "debug", false, "Enable debug logs.");
 
         MinecraftForge.EVENT_BUS.register(this);
         proxy.preInit();
