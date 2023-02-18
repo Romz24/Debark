@@ -96,10 +96,12 @@ public final class DebarkMod {
             add("minecraft:log,variant");
             add("minecraft:log2,variant");
         }
-        for (int i = 0; i <= 6; i++) {
+        for (int i = 0; i <= 7; i++) {
             add("forestry:logs." + i + ",variant");
             add("forestry:logs.fireproof." + i + ",variant");
         }
+        // add("forestry:logs.vanilla.fireproof.0,variant"); // bug: invalid textures
+        // add("forestry:logs.vanilla.fireproof.1,variant"); // bug: invalid textures
         for (int i = 0; i <= 9; i++) {
             add("extratrees:logs." + i + ",variant");
             add("extratrees:logs.fireproof." + i + ",variant");
@@ -109,6 +111,7 @@ public final class DebarkMod {
         }
         add("aether_legacy:aether_log,aether_logs");
         add("atum:palm_log");
+        add("atum:deadwood_log");
         add("bewitchment:juniper_wood");
         add("bewitchment:elder_wood");
         add("bewitchment:yew_wood");
@@ -142,6 +145,10 @@ public final class DebarkMod {
         }
         add("traverse:fir_log");
         add("twilightforest:twilight_log,variant");
+        add("ic2:rubber_wood");
+        add("mysticalworld:charred_log");
+        add("extraplanets:kepler22b_maple_logs,variant");
+        add("extraplanets:kepler22b_maple_logs2,variant");
 
         String[] edl = config.get("modsupport", "extraDebarkedLogs", new String[0], "Format: blockId,property1,property2,etc").getStringList();
         Stream.of(edl).forEach(this::add);
